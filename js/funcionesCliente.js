@@ -123,7 +123,7 @@ function deleteCliente(idBotonBorrar){
 ///////////////////////////
 
 function pintarCliente(respuesta){
-    let myTable="<table>";
+    let myTable="<table class='table-auto w-full text-left whitespace-no-wrap'>";
     for(i=0;i<respuesta.length;i++){
         myTable+="<tr>";
         myTable+="<td>"+respuesta[i].email+"</td>";

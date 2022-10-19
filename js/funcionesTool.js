@@ -136,7 +136,7 @@ function getTool_Category(){
 
 /////////////////////////////////////////////////////
 function pintarTool(respuesta){
-    let myTable="<table>";
+    let myTable="<table class='table-auto w-full text-left whitespace-no-wrap'>";
     for(i=0;i<respuesta.length;i++){
         myTable+="<tr>";
         myTable+="<td>"+respuesta[i].brand+"</td>";

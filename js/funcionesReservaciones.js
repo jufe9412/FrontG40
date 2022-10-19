@@ -11,22 +11,7 @@ function getReservaciones(){
     });
 
 }
-function pintarReservation(respuesta){
-    let myTable="<table>";
-    for(i=0;i<respuesta.length;i++){
-        myTable+="<tr>";
-        myTable+="<td>"+respuesta[i].startDate+"</td>";
-        myTable+="<td>"+respuesta[i].devolutionDate+"</td>";
-        myTable+="<td>"+respuesta[i].status+"</td>";
-        myTable+="<td>"+respuesta[i].client.name+"</td>";
-        myTable+="<td>"+respuesta[i].tool.name+"</td>";
-        myTable+="<td> <button onclick='putReservaciones("+respuesta[i].idReservation+")'>Actualizar</button> ";
-        myTable+="<td> <button onclick='deleteReservaciones("+respuesta[i].idReservation+")'>Borrar</button> ";
-        myTable+="</tr>";   
-    }
-    myTable+="</table>";
-    $("#resultado4").html(myTable);
-}
+
 function postReservaciones(){
 
     if ( $("#startDate").val().length==0 || 
@@ -58,38 +43,34 @@ function postReservaciones(){
     
 }
 function putReservaciones(idBotonActualizar){
-
-console.log(idBotonActualizar);
-if($("#startDate").val().length==0 || $("#devolutionDate").val().length==0 ){
-    alert("Todos los campos son obligatorios");
-
-}else{
     
-    let cajas = {
-        idReservation:idBotonActualizar,
-        startDate:$("#startDate").val(),
-        devolutionDate:$("#devolutionDate").val(),
-        status:$("#status").val(),
-        client:{idClient: +$("#select-client").val()},
-        tool:{id: +$("#select-tool").val()},
-       
-    };
-   console.log(cajas);
-
-    $.ajax({
-        url:"http://129.151.120.96:8080/api/Reservation/update",
-        type:"PUT",
-        datatype:"JSON",
-        contentType:"application/json",
-        data: JSON.stringify(cajas),
-        success:function(respuesta){
-            alert("se actualizo correctamente la herramineta");
-            window.location.reload();
-            
-        }
-    });
+    if ( $("#startDate").val().length==0 || 
+    $("#devolutionDate").val().length==0 ){
+    alert("Todos los campos son obligatorios");
+    }else{
+        let cajas = {
+            idReservation:idBotonActualizar,
+            startDate:$("#startDate").val(),
+            devolutionDate:$("#devolutionDate").val(),
+            status:$("#status").val(),
+            client:{idClient: +$("#select-client").val()},
+            tool:{id: +$("#select-tool").val()},
+        };
+        console.log(cajas);
+        
+        $.ajax({
+            url:"http://129.151.120.96:8080/api/Reservation/update",
+            type:"PUT",
+            datatype:"JSON",
+            contentType:"application/json; charset=utf-8",
+            data: JSON.stringify(cajas),
+            success:function(respuesta){
+                alert("se actualizo correctamente la reservacion");
+                window.location.reload();
+            }
+        });
     }
-
+    
 }
 function deleteReservaciones(idBotonBorrar){
     
@@ -119,8 +100,11 @@ function deleteReservaciones(idBotonBorrar){
                 }
             });
           
-          
-        
+            Swal.fire(
+                'Eliminado',
+                'Se elimino con éxito',
+                'success'
+            )
         }
     
     })    
@@ -155,3 +139,20 @@ function getClient_Reservaciones(){
         }
     });
 }
+    function pintarReservation(respuesta){
+        let myTable="<table class='table-auto w-full text-left whitespace-no-wrap'>";
+        for(i=0;i<respuesta.length;i++){
+            myTable+="<tr>";
+            myTable+="<td>"+respuesta[i].idReservation+"</td>";
+            myTable+="<td>"+respuesta[i].startDate+"</td>";
+            myTable+="<td>"+respuesta[i].devolutionDate+"</td>";
+            myTable+="<td>"+respuesta[i].status+"</td>";
+            myTable+="<td>"+respuesta[i].client.name+"</td>";
+            myTable+="<td>"+respuesta[i].tool.name+"</td>";
+            myTable+="<td> <button onclick='putReservaciones("+respuesta[i].idReservation+")'class='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>Actualizar</button> ";
+            myTable+="<td> <button onclick='deleteReservaciones("+respuesta[i].idReservation+")'class='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>Borrar</button> ";
+            myTable+="</tr>";   
+        }
+        myTable+="</table>";
+        $("#resultado4").html(myTable);
+    }

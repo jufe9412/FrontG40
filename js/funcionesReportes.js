@@ -39,7 +39,7 @@ function getFechas(){
 
 }
 function pintarFechas(respuesta){
-    let myTable="<table>";
+    let myTable="<table class='table-auto w-full text-left whitespace-no-wrap'>";
     for(i=0;i<respuesta.length;i++){
         myTable+="<tr>";
         myTable+="<td>"+respuesta[i].startDate+"</td>";
@@ -66,7 +66,7 @@ function getClientes(){
 
 }
 function pintarClientes(respuesta){
-    let myTable="<table>";
+    let myTable="<table class='table-auto w-full text-left whitespace-no-wrap'>";
     for(i=0;i<respuesta.length;i++){
 
         myTable+="<tr>";

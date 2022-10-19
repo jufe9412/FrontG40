@@ -106,7 +106,7 @@ function pintarCategoria(respuesta){
         myTable+="<td>"+respuesta[i].name+"</td>";
         myTable+="<td>"+respuesta[i].description+"</td>";
         myTable+="<td> <button onclick='putCategoria("+respuesta[i].id+")'class='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>Actualizar</button>";
-        myTable+="<td> <button onclick='deleteCategoria("+respuesta[i].id+")'class='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>Borrar</button>";
+        myTable+="<td> <button onclick='deleteCategoria("+respuesta[i].id+")'class='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-00 rounded text-lg'>Borrar</button>";
         myTable+="</tr>";
 
     }
